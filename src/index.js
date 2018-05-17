@@ -20,7 +20,3 @@ const application = (
 ReactDOM.render( application, document.getElementById('root') )
 
 registerServiceWorker()
-
-
-
- 
