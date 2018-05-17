@@ -2,7 +2,8 @@
  
 
 **Notes:**
-
+  _create-react-app by default configures your react project (babel, eslint & etc.), if you want to see the configurations run: npm run eject, nb: when you do this you expose all the configuration on react-scripts, once you do this you cannot revert back, benefits of not ejecting configurations: when ever theres an update on the dependencies on the repository you have an option to update your project base on the changes occur in the create-react-app_
+  
 [Docs](https://github.com/facebook/create-react-app/blob/master/packages/react-scripts/template/README.md)
 
 *Hot Reload Module:*
