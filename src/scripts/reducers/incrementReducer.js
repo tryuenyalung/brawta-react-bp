@@ -10,7 +10,7 @@ const initialState = Map({
 //plain object
 const actionsMap = {
     /**
-     * constant key from actions
+     * constant key from actions,
      * function as value
      * 'INCREMENT' : someFunction
      */
