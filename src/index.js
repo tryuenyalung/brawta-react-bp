@@ -6,7 +6,7 @@ import registerServiceWorker from './registerServiceWorker'
 
 import store from './scripts/store'
 
-import App from './scripts/components/App.jsx'
+import App from './scripts/App.jsx'
 
 
 const application = (
