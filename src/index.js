@@ -5,7 +5,7 @@ import registerServiceWorker from './registerServiceWorker'
 
 import store from './scripts/store'
 
-import App from './scripts/components/App'
+import App from './scripts/components/App.jsx'
 
 
 ReactDOM.render(
@@ -14,6 +14,7 @@ ReactDOM.render(
     </Provider>, 
     document.getElementById('root')
 )
+
 registerServiceWorker()
 
 
