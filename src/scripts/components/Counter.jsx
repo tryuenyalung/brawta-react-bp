@@ -4,6 +4,8 @@ import {increment, first} from './../actions/increment'
 import {get_post, get_post_by_id} from './../actions/post/get_post'
 import {decrement} from './../actions/decrement'
 import * as url from './../../assets/images/sample.JPG';
+import { Card, CardImg, CardText, CardBody,
+  CardTitle, CardSubtitle, Button } from 'reactstrap'
 
 //get state
 const mapStateToProps = state => { 
@@ -32,6 +34,18 @@ class Counter extends Component {
 
     return (
       <div>
+
+        <div>
+        <Card>
+      <CardImg top width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" />
+      <CardBody>
+        <CardTitle>Card title</CardTitle>
+        <CardSubtitle>Card subtitle</CardSubtitle>
+        <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
+        <Button>Button</Button>
+      </CardBody></Card>
+        </div>
+        <Button color="danger">Danger!</Button>
         <img src={url} width="100%" alt=""/>
         <h1>Counter Increment State {this.props.inc_counter}</h1>
         <button onClick= {this.props.first} >Add</button>        

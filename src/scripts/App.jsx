@@ -7,7 +7,9 @@ import logo from './../assets/images/logo.svg'
 import './../assets/styles/App.css'
 import { routeCodes } from './constants/routes'
 import Counter from './components/Counter.jsx'
-import NavBar from './components/NavBar.jsx';
+import AppNavBar from './components/AppNavBar.jsx'
+
+import { Container, Row, Col } from 'reactstrap'
 
 
 class App extends Component {
@@ -15,25 +17,25 @@ class App extends Component {
   render() {
 
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <div className="App-intro">
-          Boiler Plate
-          <NavBar/>
-        </div>
-        
-        <div>
-          <Switch>
-          {/* Route servers as client endpoints */}
-          <Route exact path={ routeCodes.COUNTER } component={ Counter } />
-          </Switch>
-        </div>
 
-      
+      <div>
+      <AppNavBar/>
+        
+        <Container>
+          <Row>
+            <Col>
+              <div>
+                <Switch>
+                {/* Route servers as client endpoints */}
+                <Route exact path={ routeCodes.COUNTER } component={ Counter } />
+                </Switch>
+              </div>
+            </Col>
+          </Row>
+        </Container>
       </div>
+       
+      
     )
 
   }
@@ -41,3 +43,4 @@ class App extends Component {
 }
 
 export default App
+
