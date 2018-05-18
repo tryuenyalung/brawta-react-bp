@@ -3,8 +3,8 @@ import React, { Component } from 'react'
 import { Route, Switch } from 'react-router-dom'
 
 // project import
-import logo from './../images/logo.svg'
-import './../styles/css/App.css'
+import logo from './../assets/images/logo.svg'
+import './../assets/styles/App.css'
 import { routeCodes } from './constants/routes'
 import Counter from './components/Counter.jsx'
 import NavBar from './components/NavBar.jsx';

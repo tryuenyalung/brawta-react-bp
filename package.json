@@ -14,8 +14,8 @@
   },
   "scripts": {
     "clean": "rm -rf build",
-    "build-css": "node-sass-chokidar src/styles/scss/App.scss -o src/styles/css",
-    "watch-css": "npm run build-css && node-sass-chokidar src/styles/scss/* -o src/styles/css --watch --recursive",
+    "build-css": "node-sass-chokidar src/assets/styles/scss/App.scss -o src/assets/styles",
+    "watch-css": "npm run build-css && node-sass-chokidar src/assets/styles/scss/* -o src/assets/styles/--watch --recursive",
     "start": "npm run build-css && react-scripts start",
     "build": "npm run clean && npm run build-css && react-scripts build",
     "test": "react-scripts  test  --env=jsdom",
