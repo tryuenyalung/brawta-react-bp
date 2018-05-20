@@ -7,6 +7,7 @@ import './../../assets/styles/App.css'
 import { routeCodes } from './../constants/routes'
 import Axios from './Axios'
 import Home from './Home.jsx'
+import NotFound from './NotFound.jsx'
 
 class App extends Component {
 
@@ -15,9 +16,10 @@ class App extends Component {
     return (
       <div>
           <Switch>
-              {/* Route servers as client endpoints */}
+              {/* Route serves as client endpoints */}
               <Route exact path={ routeCodes.HOME } component={ Home } />
               <Route exact path={ routeCodes.AXIOS } component={ Axios } />
+              <Route path='*' component={ NotFound } />
           </Switch>
       </div>
     )

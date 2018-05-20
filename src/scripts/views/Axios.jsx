@@ -33,7 +33,7 @@ const mapDispatchToProps = dispatch => {
 
 class Axios extends Component {
   
-  componentWillMount(){
+  componentDidMount(){
     this.props.get_post()
   }
 
@@ -50,9 +50,9 @@ class Axios extends Component {
       this.props.post !== null  ?
       this.props.post.map(post => (
         <div key={post.id}>
-          <Card >
+          <Card className="shadow p-3 mb-5">
             <CardBody>
-              <CardTitle>{post.title}</CardTitle>
+              <CardTitle>{post.id}. {post.title}</CardTitle>
               <CardSubtitle>{post.title}</CardSubtitle><br/>
               <CardText>{post.body}</CardText>
               <Button className="float-right"  color="danger">Delete</Button>
@@ -66,8 +66,8 @@ class Axios extends Component {
 
     return (
       <div>
-        <AppNavBar/><br/>
-
+        <AppNavBar/><br/><br/><br/>
+      
         <Container>
           {renderLoader}
           {renderPost}

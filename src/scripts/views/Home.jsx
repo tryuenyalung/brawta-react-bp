@@ -44,15 +44,28 @@ class Home extends Component {
 
   render() {
 
+    const renderCard =(title, subtitle, card_text, color, button_text, onClick)=>{
+      return(
+        <Card
+          card_title={title}
+          card_subtitle={subtitle}
+          card_text={card_text}
+          button_color={color}
+          button_text={button_text}
+          btn_onClick={onClick}
+        />
+      )
+    }
+
     return (
       <div>
         <AppNavBar/>
         <br/>
 
-        <Container>
+        <Container><br/><br/>
           <Row>
             <Col>
-              {this.renderCard(
+              {renderCard(
                 "Increment Card",
                 this.props.inc_counter,
                 "Test Increment",
@@ -63,8 +76,8 @@ class Home extends Component {
             </Col>
 
             <Col>
-              {this.renderCard(
-                "Increment Card",
+              {renderCard(
+                "Decrement Card",
                 this.props.dec_counter,
                 "Test Decrement",
                 "danger",

@@ -23,7 +23,7 @@ export default class AppNavBar extends Component {
 
       <div>
         
-        <Navbar color="light" light expand="md">
+        <Navbar className="fixed-top shadow-sm" color="light" light expand="md">
           <Container> 
             <NavbarBrand tag={Link} to={ routeCodes.HOME } >reactstrap</NavbarBrand>
 

@@ -13,7 +13,7 @@ import {
 export default (props) => {
   return (
     <div>
-        <Card>
+        <Card className="shadow p-3 mb-5">
             <CardImg top width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" />
                 
             <CardBody>
