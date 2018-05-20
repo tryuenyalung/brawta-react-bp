@@ -2,5 +2,6 @@ export const publicPath = '/'
 
 export const routeCodes = {
     HOME: publicPath,
-    COUNTER: `${publicPath}counter`
+    COUNTER: `${publicPath}counter`,
+    AXIOS: `${publicPath}axios`
 }

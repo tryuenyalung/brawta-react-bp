@@ -4,7 +4,7 @@ import {Map} from 'immutable'
 
 
 const initialState = Map({
-    loading: false,
+    loading: true,
     error: null,
     post: null
 })
