@@ -4,11 +4,7 @@ import { connect } from 'react-redux'
 
 import { Container,
         Jumbotron,
-        Button, 
-        Modal, 
-        ModalHeader, 
-        ModalBody, 
-        ModalFooter } from 'reactstrap'
+        Button} from 'reactstrap'
 
 // project imports
 import AppNavBar from './../components/global/AppNavBar'

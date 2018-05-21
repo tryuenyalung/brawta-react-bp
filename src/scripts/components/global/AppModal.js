@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Modal,
-        Button, 
         ModalHeader, 
         ModalBody, 
         ModalFooter } from 'reactstrap'
