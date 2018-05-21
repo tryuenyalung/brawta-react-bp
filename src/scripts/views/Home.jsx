@@ -1,11 +1,15 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Container, Row, Col} from 'reactstrap'
+import { Container,
+        Row,
+        Col,
+        CardImg,
+        Button} from 'reactstrap'
 
 // project imports
-import AppNavBar from './../components/global/AppNavBar.jsx';
-import Card from './../components/home/card';
-
+import AppNavBar from './../components/global/AppNavBar'
+import AppCard from './../components/global/AppCard'
 import {increment} from './../actions/increment'
 import {decrement} from './../actions/decrement'
 
@@ -28,35 +32,25 @@ const mapDispatchToProps = dispatch => {
 
 
 class Home extends Component {
-
-  renderCard =(title, subtitle, card_text, color, button_text, onClick)=>{
-    return(
-      <Card
-        card_title={title}
-        card_subtitle={subtitle}
-        card_text={card_text}
-        button_color={color}
-        button_text={button_text}
-        btn_onClick={onClick}
-      />
-    )
+  
+  static propTypes = {
+    inc_counter: PropTypes.number,
+    dec_counter: PropTypes.number,
   }
 
+  renderCard =(img, title, subtitle, card_text, color, button_text, onClick)=> (
+        <div>
+          <AppCard
+            card_img={img}
+            card_title={title}
+            card_subtitle={subtitle}
+            card_body="">
+            <Button className="float-right" onClick={onClick}  color={color}>{button_text}</Button>
+          </AppCard><br/>
+        </div>
+  )//@end
+
   render() {
-
-    const renderCard =(title, subtitle, card_text, color, button_text, onClick)=>{
-      return(
-        <Card
-          card_title={title}
-          card_subtitle={subtitle}
-          card_text={card_text}
-          button_color={color}
-          button_text={button_text}
-          btn_onClick={onClick}
-        />
-      )
-    }
-
     return (
       <div>
         <AppNavBar/>
@@ -64,8 +58,10 @@ class Home extends Component {
 
         <Container><br/><br/>
           <Row>
+
             <Col>
-              {renderCard(
+              {this.renderCard(
+                <CardImg top width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" />,
                 "Increment Card",
                 this.props.inc_counter,
                 "Test Increment",
@@ -76,7 +72,8 @@ class Home extends Component {
             </Col>
 
             <Col>
-              {renderCard(
+              {this.renderCard(
+                <CardImg top width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Card image cap" />,
                 "Decrement Card",
                 this.props.dec_counter,
                 "Test Decrement",
@@ -85,7 +82,6 @@ class Home extends Component {
                 this.props.decrement
               )}
             </Col>
-
 
           </Row>
         </Container>

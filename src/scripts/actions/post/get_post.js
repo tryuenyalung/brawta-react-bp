@@ -34,7 +34,7 @@ export const get_post_pending = () => {
         type: GET_POST_PENDING
     }
 }
-
+ 
 export const get_post_success = (data) => {
     return{
         type: GET_POST_SUCCESS,
