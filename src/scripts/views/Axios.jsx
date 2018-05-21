@@ -49,7 +49,7 @@ class Axios extends Component {
   }
 
 
-  toggle =()=> {
+  togglePostModal =()=> {
     this.setState({
       modalPost: !this.state.modalPost
     })
@@ -93,14 +93,14 @@ class Axios extends Component {
             search_btn= {<Button color="secondary"><i className="fa fa-search"></i></Button>}
           />
 
-          <Button color="primary" className="btn-block " onClick={this.toggle}>Add Post</Button><br/>
+          <Button color="primary" className="btn-block " onClick={this.togglePostModal}>Add Post</Button><br/>
           
           <AppModal
             modal_state ={this.state.modalPost}
-            modal_toggler ={this.toggle}
+            modal_toggler ={this.togglePostModal}
             modal_title ={"Add Post"}
             modal_body = {"This is body, to filled with form later"}
-            modal_footer = {<Button color="primary" onClick={this.toggle}><i className="fa fa-plus-circle fa-lg"></i></Button>}
+            modal_footer = {<Button color="primary" onClick={this.togglePostModal}><i className="fa fa-plus-circle fa-lg"></i></Button>}
           />
 
           {this.renderLoader()}
