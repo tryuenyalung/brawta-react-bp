@@ -54,6 +54,8 @@ export default class AppNavBar extends Component {
                     </NavLink>
                   </NavItem>
 
+     
+
                   <UncontrolledDropdown nav inNavbar>
                     <DropdownToggle nav caret>
                       Options
