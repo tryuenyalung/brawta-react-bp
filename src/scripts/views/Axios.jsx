@@ -34,7 +34,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     api_get: () => dispatch( api_get() ),
-    api_post: () => dispatch( api_post() ),
+    api_post: (values) => dispatch( api_post(values) ),
   }
 }
 
@@ -65,7 +65,7 @@ class Axios extends Component {
     })
   }
 
- renderLoader =()=> (
+  renderLoader =()=> (
     !this.props.loader ? null :
     (<Jumbotron className="text-center"><h1>Loading...</h1></Jumbotron>) 
   )
@@ -76,9 +76,12 @@ class Axios extends Component {
   )
 
   submitPost =values=>{
-    // alert(JSON.stringify(values))
     this.props.api_post(values)
+    this.togglePostModal()
   }
+
+
+  
 
   // renderPost =()=> (
   //   this.props.post === null ? null :
@@ -96,6 +99,7 @@ class Axios extends Component {
   // )//@end
 
   renderPost =()=> { 
+    console.log('post rendered');
     return(
       this.props.data === null ? null :
         this.props.data.map(data => (
@@ -117,7 +121,7 @@ class Axios extends Component {
       modal_state ={this.state.modalPost}
       modal_toggler ={this.togglePostModal}
       modal_title ={"Add Post"}
-      modal_body = { <PostForm onSubmit={this.submitPost} /> }
+      modal_body = { <PostForm  click={this.togglePostModal} onSubmit={this.submitPost} /> }
       modal_footer = {null}
     />
   )

@@ -24,11 +24,22 @@ export const api_get = () => {
 
 // action async container (thunk)
 export const api_post = (postData) => {
+    const config = {
+        method: 'POST',
+        url: `${keys.POST_API}/posts`,
+        data: JSON.stringify(postData),
+        headers: { 
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    }
 
     return (dispatch) => {
-        axios.post( `${keys.POST_API}/posts`, JSON.stringify(postData) )
+        // axios(config)
+        dispatch( api_pending() )
+        axios(config)
             .then(res => dispatch( api_post_success(res.data) ))
-            .catch(err => dispatch( api_error(err.response) ))
+            .catch(err => dispatch( api_error( err ) ))
     }
 
 }

@@ -11,7 +11,7 @@ let PostForm = props => {
       <Field name="userId" type="number" component={renderField} label="User ID" />
       <Field name="title" type="text" component={renderField} label="Post Title" />
       <Field name="body" type="text" component={renderField} label="Post Body" />
-      <Button className="float-right" color="primary" type="submit">Post</Button>
+      <Button className="float-right" color="primary" type="submit" >Post</Button>
     </form>
   )
 
