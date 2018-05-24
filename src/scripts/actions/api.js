@@ -6,6 +6,7 @@ export const API_GET_SUCCESS = 'API_GET_SUCCESS'
 export const API_GET_ONE_SUCCESS = 'API_GET_ONE_SUCCESS'
 export const API_POST_SUCCESS = 'API_POST_SUCCESS'
 export const API_PUT_SUCCESS = 'API_PUT_SUCCESS'
+export const API_DELETE_SUCCESS = 'API_DELETE_SUCCESS'
 export const API_PENDING = 'API_PENDING'
 export const API_ERROR = 'API_ERROR'
 
@@ -22,8 +23,8 @@ export const api_get = () => {
 
 }
 
-// action async container (thunk)
 export const api_post = (postData) => {
+    
     const config = {
         method: 'POST',
         url: `${keys.POST_API}/posts`,
@@ -44,6 +45,23 @@ export const api_post = (postData) => {
 
 }
 
+export const api_delete = (id) => {
+    
+    const config = {
+        method: 'DELETE',
+        url: `${keys.POST_API}/posts/${id}` 
+    }
+
+    return (dispatch) => {
+        // axios(config)
+        dispatch( api_pending() )
+        axios(config)
+            .then(res => dispatch( api_delete_success( id) ))
+            .catch(err => dispatch( api_error( err ) ))
+    }
+
+}
+
 
 // action creator
 export const api_get_success = (data) => {
@@ -53,6 +71,10 @@ export const api_get_success = (data) => {
 // export const api_get_one_success = (data) => {
 //     return{ type: API_GET_ONE_SUCCESS, data:data }
 // }
+
+export const api_delete_success = (id) => {
+    return{ type: API_DELETE_SUCCESS, id:id }
+}
 
 export const api_post_success = (data) => {
     return{ type: API_POST_SUCCESS, data:data }

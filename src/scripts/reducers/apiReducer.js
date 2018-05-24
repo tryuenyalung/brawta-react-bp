@@ -3,11 +3,9 @@ import { API_GET_SUCCESS,
         API_GET_ONE_SUCCESS,
         API_POST_SUCCESS,
         API_PUT_SUCCESS,
+        API_DELETE_SUCCESS,
         API_PENDING,
         API_ERROR} from './../actions/api'
-
-
-
 
 const initialState = Map({
     loading: true,
@@ -51,6 +49,16 @@ const actionsMap = {
     //         data: data.set( JSON.stringify(action.data) )
     //     }))
     // },
+
+    [API_DELETE_SUCCESS]: (state, action) => {
+        const stateData = state.get('data')
+        const newData = stateData.filter(x => x.id !== action.id)
+        return  Map({
+            loading: false,
+            data: newData,
+            error: null
+        })
+    },
 
     [API_ERROR]: (state, action) => {
         return state.merge(Map({

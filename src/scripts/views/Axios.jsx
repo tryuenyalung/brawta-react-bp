@@ -4,12 +4,14 @@ import { connect } from 'react-redux'
 
 import { Container,
         Jumbotron,
+        Row,
+        Col,
         Button} from 'reactstrap'
 
 // project imports
 import AppNavBar from './../components/global/AppNavBar'
 // import {get_post} from './../actions/post/get_post'
-import {api_get, api_post} from './../actions/api'
+import {api_get, api_post, api_delete} from './../actions/api'
 import AppCard from './../components/global/AppCard'
 import SearchBar from './../components/global/SearchBar'
 import AppModal from './../components/global/AppModal'
@@ -35,6 +37,7 @@ const mapDispatchToProps = dispatch => {
   return {
     api_get: () => dispatch( api_get() ),
     api_post: (values) => dispatch( api_post(values) ),
+    api_delete: (id) => dispatch( api_delete(id) )
   }
 }
 
@@ -55,7 +58,6 @@ class Axios extends Component {
   }
   
   componentDidMount(){
-    // this.props.get_post()
     this.props.api_get()
   }
 
@@ -72,7 +74,13 @@ class Axios extends Component {
 
   renderPostError =()=> (
     this.props.error === null ? null : 
-    (<Jumbotron className="text-center"><h1>{this.props.error}</h1></Jumbotron>) 
+    (<Jumbotron className="text-center">
+      <Row>
+        <Col>
+        <p>{JSON.stringify(this.props.error.response,null,'\t')}</p>
+        </Col>
+      </Row>
+    </Jumbotron>) 
   )
 
   submitPost =values=>{
@@ -80,23 +88,12 @@ class Axios extends Component {
     this.togglePostModal()
   }
 
+  deletePost =id=>{
+    this.props.api_delete(id)
+  }
 
-  
 
-  // renderPost =()=> (
-  //   this.props.post === null ? null :
-  //     this.props.post.map(post => (
-  //       <div key={post.id}>
-  //         <AppCard
-  //           card_img=""
-  //           card_title={`${post.id} . ${post.title}`}
-  //           card_subtitle="subtitle"
-  //           card_body={post.body}>
-  //           <Button className="float-right"  color="danger">Delete</Button>
-  //         </AppCard>
-  //       </div>
-  //   )).reverse()
-  // )//@end
+ 
 
   renderPost =()=> { 
     console.log('post rendered');
@@ -109,7 +106,7 @@ class Axios extends Component {
                 card_title={`${data.id} . ${data.title}`}
                 card_subtitle="subtitle"
                 card_body={data.body}>
-                <Button className="float-right"  color="danger">Delete</Button>
+                <Button  onClick={ () => this.deletePost(data.id) }  className="float-right"  color="danger">Delete</Button>
               </AppCard>
             </div>
         )).reverse()
