@@ -11,7 +11,8 @@ import { Container,
 // project imports
 import AppNavBar from './../components/global/AppNavBar'
 // import {get_post} from './../actions/post/get_post'
-import {api_get, api_post, api_delete} from './../actions/api'
+import {application_properties as keys} from './../constants/application_properties'
+import {api_get, api_post, api_delete, api_put} from './../actions/api'
 import AppCard from './../components/global/AppCard'
 import SearchBar from './../components/global/SearchBar'
 import AppModal from './../components/global/AppModal'
@@ -20,12 +21,6 @@ import PostForm from './../forms/PostForm'
 //get state
 const mapStateToProps = state => { 
   return{
-      //post initial state is empty
-      // post: state.getPostReducer.get('post'),
-      // error: state.getPostReducer.get('error'),
-      // loader: state.getPostReducer.get('loading')
-
-
       data: state.apiReducer.get('data'),
       error: state.apiReducer.get('error'),
       loader: state.apiReducer.get('loading')
@@ -35,9 +30,10 @@ const mapStateToProps = state => {
 //dispatch actions
 const mapDispatchToProps = dispatch => {
   return {
-    api_get: () => dispatch( api_get() ),
+    api_get: (url) => dispatch( api_get(url) ),
     api_post: (values) => dispatch( api_post(values) ),
-    api_delete: (id) => dispatch( api_delete(id) )
+    api_delete: (id) => dispatch( api_delete(id) ),
+    api_put: (id, values) => dispatch( api_put(id,values) )
   }
 }
 
@@ -53,17 +49,32 @@ class Axios extends Component {
     super(props)
   
     this.state = {
-      modalPost: false 
+      modalPost: false,
+      modalPut: false,
+
+      updatePostData: {
+        id: null,
+        userId: null,
+        title: null,
+        body: null
+      }
+
     }
   }
   
   componentDidMount(){
-    this.props.api_get()
+    this.props.api_get(`${keys.POST_API}/posts`)
   }
 
   togglePostModal =()=> {
     this.setState({
       modalPost: !this.state.modalPost
+    })
+  }
+
+  togglePutModal =()=> {
+    this.setState({
+      modalPut: !this.state.modalPut
     })
   }
 
@@ -83,9 +94,14 @@ class Axios extends Component {
     </Jumbotron>) 
   )
 
-  submitPost =values=>{
+  createPost =values=>{
     this.props.api_post(values)
     this.togglePostModal()
+  }
+
+  updatePost =values=>{
+    this.props.api_put(this.state.updatePostData.id, values)
+    this.togglePutModal()
   }
 
   deletePost =id=>{
@@ -107,21 +123,62 @@ class Axios extends Component {
                 card_subtitle="subtitle"
                 card_body={data.body}>
                 <Button  onClick={ () => this.deletePost(data.id) }  className="float-right"  color="danger">Delete</Button>
+                <Button  onClick={ () => this.setUpdatePostData(data.id, data.userId, data.title, data.body) }  className="float-right" color="info">Update</Button>
               </AppCard>
             </div>
         )).reverse()
     )
   }//@end
-     
-  injectModal =()=>(
+
+
+  
+  injectPostModal =()=>(
     <AppModal
       modal_state ={this.state.modalPost}
       modal_toggler ={this.togglePostModal}
       modal_title ={"Add Post"}
-      modal_body = { <PostForm  click={this.togglePostModal} onSubmit={this.submitPost} /> }
+      modal_body = { <PostForm id ="" userId="" title="" body="" click={this.togglePostModal} onSubmit={this.createPost} /> }
       modal_footer = {null}
     />
   )
+
+  injectPutModal =()=>(
+    <AppModal
+      modal_state ={this.state.modalPut}
+      modal_toggler ={this.togglePutModal}
+      modal_title ={"Update Post"}
+      
+      modal_body = { 
+      <PostForm  
+        id={this.state.updatePostData.id} 
+        userId={this.state.updatePostData.userId} 
+        title={this.state.updatePostData.title} 
+        body={this.state.updatePostData.body} 
+        click={this.togglePutModal} 
+        onSubmit={this.updatePost} 
+      /> }
+
+      modal_footer = {null}
+    />
+  )
+
+  setUpdatePostData=(id, userId, title, body)=>{
+    this.setState({
+      updatePostData: {
+        id: id,
+        userId: userId,
+        title: title,
+        body: body
+      }
+    })
+
+    this.togglePutModal()
+  }
+
+
+
+
+
 
   render() {
     return (
@@ -133,14 +190,22 @@ class Axios extends Component {
           <SearchBar
             search_placeholder ={"Search for post.."}
             search_btn_location ={"append"}
-            search_btn= {<Button color="secondary"><i className="fa fa-search"></i></Button>}
+            search_btn= {<Button  className="btn-outline-dark"><i className="fa fa-search"></i></Button>}
           />
 
-          <Button color="primary" className="btn-block " onClick={this.togglePostModal}>Add Post</Button><br/>
+          <Row>
+            <Col>
+              <Button color="primary" className="btn-outline-primary" onClick={ () => window.location.reload() } ><i className="fa fa-recycle"/></Button>
+              <Button color="primary" className="btn-outline-dark float-right" onClick={this.togglePostModal}>Add Post</Button>
+            </Col>
+          </Row><br/>
+
+
           {this.renderLoader()}
           {this.renderPostError()}
           {this.renderPost()}
-          {this.injectModal()}
+          {this.injectPostModal()}
+          {this.injectPutModal()}
         </Container>
         
       </div>

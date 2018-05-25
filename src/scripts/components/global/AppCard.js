@@ -28,7 +28,7 @@ AppCard.propTypes = {
     card_title: PropTypes.string,
     card_subtitle:PropTypes.any,
     card_body: PropTypes.string,
-    children: PropTypes.element.isRequired
+    children: PropTypes.any
 }
 
 export default AppCard

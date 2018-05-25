@@ -1,4 +1,4 @@
-import {Map,fromJS} from 'immutable'
+import {Map} from 'immutable'
 import { API_GET_SUCCESS, 
         API_GET_ONE_SUCCESS,
         API_POST_SUCCESS,
@@ -32,7 +32,6 @@ const actionsMap = {
     },
 
     [API_POST_SUCCESS]: (state, action) => {
-        console.log(action.data);
 
         let newData = state.get('data')
         newData.push(action.data)
@@ -43,12 +42,18 @@ const actionsMap = {
         }))
     },
 
-    // [API_PUT_SUCCESS]: (state, action) => {
-    //     return state.merge(Map({
-    //         loading: false,
-    //         data: data.set( JSON.stringify(action.data) )
-    //     }))
-    // },
+    [API_PUT_SUCCESS]: (state, action) => {
+        const newData = state.get('data')
+        const arrayIndex = newData.findIndex(x => x.id === action.data.id)
+        //update object on array
+        newData.splice(arrayIndex, 1, action.data)
+        
+        return state.merge(Map({
+            loading: false,
+            data: newData,
+            error: null
+        }))
+    },
 
     [API_DELETE_SUCCESS]: (state, action) => {
         const stateData = state.get('data')

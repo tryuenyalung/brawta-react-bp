@@ -1,17 +1,18 @@
 import React from 'react'
 import {reduxForm, Field} from 'redux-form'
-import {Button} from 'reactstrap'
+import {Button,Label} from 'reactstrap'
 import renderField from './InputField'
 
 let PostForm = props => {
-  const { handleSubmit,submitting  } = props
+  const { handleSubmit } = props
 
   return (
     <form onSubmit={handleSubmit}>
-      <Field name="userId" type="number" component={renderField} label="User ID" />
-      <Field name="title" type="text" component={renderField} label="Post Title" />
-      <Field name="body" type="text" component={renderField} label="Post Body" />
-      <Button className="float-right" color="primary" type="submit" >Post</Button>
+      <Label>ID : {props.id} </Label>
+      <Field inputValue={props.userId} name="userId" type="number" component={renderField} label="User ID" />
+      <Field inputValue={props.title} name="title" type="text" component={renderField} label="Post Title" />
+      <Field inputValue={props.body} name="body" type="text" component={renderField} label="Post Body" />
+      <Button className="float-right btn-outline-success" type="submit" >Submit</Button>
     </form>
   )
 
