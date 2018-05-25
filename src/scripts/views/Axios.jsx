@@ -6,7 +6,8 @@ import { Container,
         Jumbotron,
         Row,
         Col,
-        Button} from 'reactstrap'
+        Button,
+        ButtonGroup} from 'reactstrap'
 
 // project imports
 import AppNavBar from './../components/global/AppNavBar'
@@ -64,6 +65,8 @@ class Axios extends Component {
   
   componentDidMount(){
     this.props.api_get(`${keys.POST_API}/posts`)
+
+ 
   }
 
   togglePostModal =()=> {
@@ -79,8 +82,8 @@ class Axios extends Component {
   }
 
   renderLoader =()=> (
-    !this.props.loader ? null :
-    (<Jumbotron className="text-center"><h1>Loading...</h1></Jumbotron>) 
+    !this.props.loader ? null : ( <div className="spinner"/> )
+    // (<Jumbotron className="text-center"><h1>Loading...</h1></Jumbotron>)
   )
 
   renderPostError =()=> (
@@ -122,8 +125,10 @@ class Axios extends Component {
                 card_title={`${data.id} . ${data.title}`}
                 card_subtitle="subtitle"
                 card_body={data.body}>
-                <Button  onClick={ () => this.deletePost(data.id) }  className="float-right"  color="danger">Delete</Button>
-                <Button  onClick={ () => this.setUpdatePostData(data.id, data.userId, data.title, data.body) }  className="float-right" color="info">Update</Button>
+                <ButtonGroup className="float-right">
+                  <Button  onClick={ () => this.deletePost(data.id) }  className="btn-outline-danger" >Delete</Button> 
+                  <Button  onClick={ () => this.setUpdatePostData(data.id, data.userId, data.title, data.body) }  className="btn-outline-info" color="info">Update</Button>
+                </ButtonGroup>
               </AppCard>
             </div>
         )).reverse()
@@ -183,7 +188,7 @@ class Axios extends Component {
   render() {
     return (
       <div>
-        <AppNavBar/><br/><br/><br/>
+        <AppNavBar/><br/><br/><br/><br/>
       
         <Container>
  
@@ -192,7 +197,7 @@ class Axios extends Component {
             search_btn_location ={"append"}
             search_btn= {<Button  className="btn-outline-dark"><i className="fa fa-search"></i></Button>}
           />
-
+          
           <Row>
             <Col>
               <Button color="primary" className="btn-outline-primary" onClick={ () => window.location.reload() } ><i className="fa fa-recycle"/></Button>
